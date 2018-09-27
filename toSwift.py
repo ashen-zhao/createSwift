@@ -14,7 +14,7 @@ def createSwift(fileNmae,propertyNumber,methodArray):
 
     file = open(full_path, 'w')
 
-    file.write('//\n//  '+fileNmae+'.swift\n//  Orange\n\n//  Created by Ashen on 18/06/06.\n//  Copyright ©  2018年 BeiLian. All rights reserved.\n//\n\n')
+    file.write('//\n//  '+fileNmae+'.swift\n//  BLQbank\n\n//  Created by Ashen on 18/09/27.\n//  Copyright ©  2018年 BeiLian. All rights reserved.\n//\n\n')
 
     file.write('import UIKit \n\n' + 'class '+fileNmae+': UIViewController {\n\n')
     
@@ -37,7 +37,7 @@ def createSwift(fileNmae,propertyNumber,methodArray):
 
     for methodName in methodArray:
 
-        file.write('    public func '+methodName+'TOVC() {\n\n       var realArr = Array<String>()\n')
+        file.write('    public func '+methodName+'_Method() {\n\n       var realArr = Array<String>()\n')
 
         number = random.randint(3, 10)
 
@@ -65,7 +65,7 @@ def createClassName():
     array = []
 
     # 设置生成多少个类
-    classNumber = 3
+    classNumber = 7
     for i in range(classNumber):
 
         final=(random.choice(first))
@@ -86,14 +86,27 @@ def createClassName():
     return array
 
 #属性类型
-classArray = ['UIColor','UILabel','UITableView','UISlider','UIScrollView','UIView','UIButton']
+classArray = ['UIColor','UILabel','UITableView','UISlider','UIScrollView','UIView','UIButton','UITextView']
 
 array = createClassName()
 
 array = list(set(array))
 
-for name in array:
 
+enterfileNmae = 'AAAAAAAAAAAAA_EnterVC'
+
+full_path =  sys.path[0] + '/SwiftFiles/' + enterfileNmae + '.swift'
+
+file = open(full_path, 'w')
+
+file.write('//\n//  '+enterfileNmae+'.swift\n//  BLQbank\n\n//  Created by Ashen on 18/09/27.\n//  Copyright ©  2018年 BeiLian. All rights reserved.\n//\n\n')
+
+file.write('import UIKit \n\n' + 'class '+enterfileNmae+': UIViewController {\n\n')
+
+file.write('    override func viewDidLoad() {\n       super.viewDidLoad()\n  ')
+
+for name in array:
+    file.write('\n\n       let '+name+'_vc = '+name+'VCtler()')
     number = random.randint(3, 10)
 
     methodArray = []
@@ -103,6 +116,9 @@ for name in array:
         methodArray.append(random.choice(array))
 
     methodArray = list(set(methodArray))#数组去重
-    
-    createSwift(name+'VController',number,methodArray)
+    createSwift(name+'VCtler',number,methodArray)
+    file.write('\n\n       '+name+'_vc.'+methodArray[0]+'_Method()')
+
+file.write('\n    }\n\n')
+file.write('}')
 
